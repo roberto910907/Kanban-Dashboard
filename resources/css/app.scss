@@ -1,0 +1,62 @@
+@import "font-sizes";
+
+html, head, body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: Inter var, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+
+body {
+  overflow: hidden;
+
+  .navbar {
+    background-color: #49576b;
+    padding: 15px 30px;
+
+    p {
+      margin: 0;
+      color: white;
+      font-size: 20px;
+    }
+  }
+
+  .flex {
+    display: flex;
+
+    &.flex-row {
+      flex-direction: row;
+    }
+
+    &.flex-column {
+      flex-direction: column;
+    }
+  }
+
+  .column {
+    padding: 3px 5px;
+    border: 1px solid #49576b;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin-left: 12px;
+    width: 272px;
+
+    .card {
+      margin: 8px 2px;
+      background-color: #e2e8f0;
+      border-radius: 5px;
+      padding: 10px;
+    }
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .h-60 {
+    height: 60px
+  }
+
+  .mt-1 {
+    margin-top: 1rem;
+  }
+}

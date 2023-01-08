@@ -3,14 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico">
 
-    <title>Trello Clone</title>
+    <title>Kanban Dashboard</title>
 
-    @vite('resources/js/app.js')
+    @vite(['resources/js/app.js', 'resources/css/app.scss'])
 </head>
 <body>
 <div id="app">
-    <App></App>
+    <App class="text-base"></App>
 </div>
 </body>
 </html>

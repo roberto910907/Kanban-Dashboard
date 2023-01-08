@@ -1,19 +1,15 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\ColumnController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::controller(ColumnController::class)->prefix('columns')->group(function () {
+    Route::get('list', 'list')->name('column.list');
+    Route::post('add', 'store')->name('column.store');
+});
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(CardController::class)->prefix('cards')->group(function () {
+    Route::get('/{column}/list', 'list')->name('card.list');
+    Route::post('/{column}/add', 'store')->name('card.store');
 });
