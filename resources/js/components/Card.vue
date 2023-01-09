@@ -67,7 +67,7 @@ export default {
     async updateCard() {
       try {
         const { data } = await axios.put(
-          `/api/cards/${this.card.id}/update`,
+          `/api/cards/update/${this.card.id}`,
           this.card
         );
 
