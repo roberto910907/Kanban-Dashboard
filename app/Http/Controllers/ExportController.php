@@ -18,6 +18,7 @@ class ExportController extends Controller
         MySql::create()
           ->setDbName(config('database.connections.mysql.database'))
           ->setHost(config('database.connections.mysql.host'))
+          ->setPort(config('database.connections.mysql.port'))
           ->setUserName(config('database.connections.mysql.username'))
           ->setPassword(config('database.connections.mysql.password'))
           ->dumpToFile(Storage::disk('public')->path($fileName));
