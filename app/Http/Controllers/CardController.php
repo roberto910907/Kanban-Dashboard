@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreCardRequest;
 use App\Http\Requests\FilterCardRequest;
+use App\Http\Requests\UpdateCardRequest;
 use App\Http\Requests\UpdateCardColumnRequest;
 use App\Http\Requests\UpdateCardPositionRequest;
 
@@ -83,6 +84,22 @@ class CardController extends Controller
         return response()->json([
           'id' => $newCard->id,
         ]);
+    }
+
+    /**
+     * @param UpdateCardRequest $request
+     * @param Card $card
+     *
+     * @return JsonResponse
+     */
+    public function update(UpdateCardRequest $request, Card $card): JsonResponse
+    {
+        $card->update([
+          'title' => $request->validated('title'),
+          'description' => $request->validated('description'),
+        ]);
+
+        return response()->json(['status' => 'success']);
     }
 
     /**

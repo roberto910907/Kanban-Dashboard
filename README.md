@@ -9,5 +9,5 @@ The current project aims to create a Trello clone with some of the most common f
 - [x] Add card and column using inline editable form([commit d395c0](https://github.com/roberto910907/Trello-Clone/commit/d395c0275f43ee0546f19c90dd8869d349567b8a))
 - [x] Add drag & drop feature for cards (same and different columns)([commit d395c0](https://github.com/roberto910907/Trello-Clone/commit/d395c0275f43ee0546f19c90dd8869d349567b8a))
 - [x] Add GET API implementation with access token([commit afa167](https://github.com/roberto910907/Trello-Clone/commit/afa1673e22fa31150798c6cde657c3b85bcad6f9))
+- [x] Improve the UI with better UX(error notifications, colors, etc.)
 - [ ] Refactor sass code(mixins, variables, font-sizes)
-- [ ] Improve the UI with better UX(error notifications, colors, etc)

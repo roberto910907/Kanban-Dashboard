@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Column;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreColumnRequest;
@@ -11,13 +10,9 @@ use App\Http\Requests\StoreColumnRequest;
 class ColumnController extends Controller
 {
     /**
-     * TODO: Implement store request here
-     *
-     * @param Request $request
-     *
      * @return JsonResponse
      */
-    public function list(Request $request): JsonResponse
+    public function list(): JsonResponse
     {
         return response()->json([
           'columns' => Column::query()

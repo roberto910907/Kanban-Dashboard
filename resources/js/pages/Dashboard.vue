@@ -12,19 +12,22 @@
       ></Column>
 
       <div v-if="!creating" class="column h-60" @click="creating = true">
-        <p class="text-center">+ Add new column</p>
+        <p class="text-center link">+ Add new column</p>
       </div>
-      <div v-else class="column h-60">
+      <div v-else class="column h-90">
         <input
           v-model="newColumn.title"
           placeholder="Enter column title..."
           type="text"
+          class="form-control h-36"
           @keydown.enter="saveColumn"
         />
 
         <div class="flex mt-1">
-          <button @click.prevent="saveColumn">Save Column</button>
-          <span class="cursor-pointer ml-1" @click="creating = false">
+          <button class="button primary" @click.prevent="saveColumn">
+            Save Column
+          </button>
+          <span class="cursor-pointer ml-1 link" @click="creating = false">
             Cancel
           </span>
         </div>

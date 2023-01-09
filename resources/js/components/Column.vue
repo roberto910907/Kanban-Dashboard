@@ -1,7 +1,7 @@
 <template>
   <div class="column">
     <div class="flex">
-      <span class="grow">{{ column.title }}</span>
+      <span class="grow title ml-1">{{ column.title }}</span>
       <Icon
         icon-name="delete"
         class="bg-red cursor-pointer"
@@ -9,28 +9,38 @@
       ></Icon>
     </div>
 
+    <div v-if="column.cards.length" class="flex mt-1">
+      <input
+        v-model="search"
+        type="text"
+        placeholder="Search card by title..."
+        class="form-control w-full h-36"
+      />
+    </div>
+
     <Draggable
       :id="`column_${column.id}`"
       group="cards"
-      :list="column.cards"
+      :list="filteredCards"
       @end="updateDraggedCard"
     >
-      <Card v-for="card in column.cards" :key="card.id" :card="card"></Card>
+      <Card v-for="card in filteredCards" :key="card.id" :card="card"></Card>
     </Draggable>
 
-    <div v-if="!creating" class="cursor-pointer" @click="creating = true">
-      <span>+ Add new card</span>
+    <div v-if="!creating" class="cursor-pointer mt-1" @click="creating = true">
+      <span class="link">+ Add new card</span>
     </div>
     <div v-else class="card">
       <textarea
         v-model="newCard.title"
-        rows="2"
+        rows="3"
+        class="form-control"
         @keydown.enter="saveCard"
       ></textarea>
 
       <div class="flex mt-1">
-        <button @click="saveCard">Save Card</button>
-        <span class="cursor-pointer ml-1" @click="creating = false">
+        <button class="button primary" @click="saveCard">Save Card</button>
+        <span class="cursor-pointer ml-1 link" @click="creating = false">
           Cancel
         </span>
       </div>
@@ -60,10 +70,19 @@ export default {
 
   data() {
     return {
+      search: '',
       creating: false,
       dragging: false,
       newCard: { ...CARD_DATA },
     };
+  },
+
+  computed: {
+    filteredCards() {
+      return this.search
+        ? this.column.cards.filter((card) => card.title.includes(this.search))
+        : this.column.cards;
+    },
   },
 
   methods: {
