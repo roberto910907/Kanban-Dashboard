@@ -12,4 +12,5 @@ The current project aims to create a Trello clone with some of the most common f
 - [x] Improve the UI with better UX(error notifications, colors, etc.)([commit bf88cf6](https://github.com/roberto910907/Trello-Clone/commit/bf88cf6a2c819bddb9a851ad708b40d3f2afbf5d))
 - [ ] Refactor sass code with BEM(mixins, variables, font-sizes)
 
+## Screenshot
 ![Screenshot](./public/img/screenshot.png)
