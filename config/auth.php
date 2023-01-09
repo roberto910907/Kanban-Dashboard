@@ -108,4 +108,5 @@ return [
 
     'password_timeout' => 10800,
 
+    'secret_token' => env('SECRET_TOKEN')
 ];

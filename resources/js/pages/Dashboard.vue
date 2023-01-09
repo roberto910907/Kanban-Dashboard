@@ -7,6 +7,7 @@
         v-for="column in columns"
         :key="column.id"
         :column="column"
+        @column-updated="(cards) => (column.cards = cards)"
         @column-deleted="getColumnList"
       ></Column>
 

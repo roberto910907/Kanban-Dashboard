@@ -23,7 +23,7 @@
     </div>
     <div v-else class="card">
       <textarea
-        v-model="newCard.name"
+        v-model="newCard.title"
         rows="2"
         @keydown.enter="saveCard"
       ></textarea>
@@ -45,7 +45,7 @@ import Card from './Card.vue';
 import Icon from './Icon.vue';
 
 const CARD_DATA = {
-  name: '',
+  title: '',
 };
 
 export default {
@@ -122,7 +122,7 @@ export default {
       try {
         const { data } = await axios.get(`/api/cards/${this.column.id}/list`);
 
-        this.column.cards = data.cards; // TODO: Refactor this with a emitted event
+        this.$emit('column-updated', data.cards);
       } catch (error) {
         // Show UI error notification
       }

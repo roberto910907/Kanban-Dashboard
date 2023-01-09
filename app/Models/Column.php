@@ -12,13 +12,13 @@ class Column extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title',
-        'position',
+      'title',
+      'position',
     ];
 
     protected $casts = [
-        'created_at' => 'datetime:Y-m-d h:i a',
-        'updated_at' => 'datetime:Y-m-d h:i a',
+      'created_at' => 'datetime:Y-m-d H:i:s',
+      'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     public function cards(): HasMany

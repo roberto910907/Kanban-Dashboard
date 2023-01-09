@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use App\Models\Column;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use App\Http\Requests\StoreCardRequest;
+use App\Http\Requests\FilterCardRequest;
+use App\Http\Requests\UpdateCardColumnRequest;
+use App\Http\Requests\UpdateCardPositionRequest;
 
 class CardController extends Controller
 {
+    public const STATUS_ACTIVE = '1';
+    public const STATUS_INACTIVE = '0';
+
     /**
-     * TODO: Implement store request here
-     *
      * @param Request $request
      * @param Column $column
      *
@@ -30,14 +36,36 @@ class CardController extends Controller
     }
 
     /**
-     * TODO: Implement store request here
+     * @param FilterCardRequest $request
      *
-     * @param Request $request
+     * @return Response
+     */
+    public function filterCards(FilterCardRequest $request): Response
+    {
+        $cardsQuery = Card::query()->withTrashed();
+
+        if ($creationDate = $request->get('date')) {
+            $cardsQuery->whereDate('created_at', $creationDate);
+        }
+
+        $status = $request->query('status');
+
+        if ($status === self::STATUS_ACTIVE) {
+            $cardsQuery->whereNull('deleted_at');
+        } elseif ($status === self::STATUS_INACTIVE) {
+            $cardsQuery->whereNotNull('deleted_at');
+        }
+
+        return response($cardsQuery->get());
+    }
+
+    /**
+     * @param StoreCardRequest $request
      * @param Column $column
      *
      * @return JsonResponse
      */
-    public function store(Request $request, Column $column): JsonResponse
+    public function store(StoreCardRequest $request, Column $column): JsonResponse
     {
         $lastCard = Card::query()
           ->where('column_id', $column->id)
@@ -49,7 +77,7 @@ class CardController extends Controller
         $newCard = Card::create([
           'position' => $lastPosition + 1,
           'column_id' => $column->id,
-          ...$request->all(),
+          'title' => $request->validated('title'),
         ]);
 
         return response()->json([
@@ -58,33 +86,29 @@ class CardController extends Controller
     }
 
     /**
-     * TODO: Implement store request here
-     *
-     * @param Request $request
+     * @param UpdateCardPositionRequest $request
      * @param Card $card
      *
      * @return JsonResponse
      */
-    public function updatePosition(Request $request, Card $card): JsonResponse
+    public function updatePosition(UpdateCardPositionRequest $request, Card $card): JsonResponse
     {
-        $card->update(['position' => $request->request->get('position')]);
+        $card->update(['position' => $request->validated('position')]);
 
         return response()->json(['status' => 'success']);
     }
 
     /**
-     * TODO: Implement store request here
-     *
-     * @param Request $request
+     * @param UpdateCardColumnRequest $request
      * @param Card $card
      *
      * @return JsonResponse
      */
-    public function updateColumn(Request $request, Card $card): JsonResponse
+    public function updateColumn(UpdateCardColumnRequest $request, Card $card): JsonResponse
     {
         $card->update([
-          'column_id' => $request->request->get('column_id'),
-          'position' => $request->request->get('position'),
+          'column_id' => $request->validated('column_id'),
+          'position' => $request->validated('position'),
         ]);
 
         return response()->json(['status' => 'success']);

@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\ColumnController;
 
+Route::controller(CardController::class)->middleware('api_token')->prefix('list-cards')->group(function () {
+    Route::get('/', 'filterCards');
+});
+
 Route::controller(ColumnController::class)->prefix('columns')->group(function () {
     Route::get('list', 'list')->name('column.list');
     Route::post('add', 'store')->name('column.store');

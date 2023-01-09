@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Column;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreColumnRequest;
 
 class ColumnController extends Controller
 {
@@ -28,20 +30,18 @@ class ColumnController extends Controller
     }
 
     /**
-     * TODO: Implement store request here
-     *
-     * @param Request $request
+     * @param StoreColumnRequest $request
      *
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreColumnRequest $request): JsonResponse
     {
         $lastColumn = Column::query()->orderBy('position', 'desc')->first();
         $lastPosition = $lastColumn->position ?? 0;
 
         $newColumn = Column::create([
           'position' => $lastPosition + 1,
-          ...$request->all(),
+          'title' => $request->validated('title'),
         ]);
 
         return response()->json([
@@ -56,7 +56,12 @@ class ColumnController extends Controller
      */
     public function delete(Column $column): JsonResponse
     {
+        DB::beginTransaction();
+
         $column->delete();
+        $column->cards()->delete(); // cascade delete for related cards
+
+        DB::commit();
 
         return response()->json(['status' => 'success']);
     }
