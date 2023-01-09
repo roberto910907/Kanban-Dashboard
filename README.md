@@ -11,3 +11,5 @@ The current project aims to create a Trello clone with some of the most common f
 - [x] Add GET API implementation with access token([commit afa167](https://github.com/roberto910907/Trello-Clone/commit/afa1673e22fa31150798c6cde657c3b85bcad6f9))
 - [x] Improve the UI with better UX(error notifications, colors, etc.)([commit bf88cf6](https://github.com/roberto910907/Trello-Clone/commit/bf88cf6a2c819bddb9a851ad708b40d3f2afbf5d))
 - [ ] Refactor sass code with BEM(mixins, variables, font-sizes)
+
+![Screenshot](./public/img/screenshot.png)
