@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div :id="`card_${card.id}`" class="card">
     <span>{{ card.name }}</span>
   </div>
 </template>

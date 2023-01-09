@@ -18,7 +18,12 @@ class ColumnController extends Controller
     public function list(Request $request): JsonResponse
     {
         return response()->json([
-          'columns' => Column::query()->orderBy('position')->with('cards')->get(),
+          'columns' => Column::query()
+            ->with(['cards' => function ($query) {
+                $query->orderByPosition();
+            }])
+            ->oldest('position')
+            ->get(),
         ]);
     }
 
@@ -35,12 +40,24 @@ class ColumnController extends Controller
         $lastPosition = $lastColumn->position ?? 0;
 
         $newColumn = Column::create([
-          'position' => $lastPosition,
+          'position' => $lastPosition + 1,
           ...$request->all(),
         ]);
 
         return response()->json([
           'id' => $newColumn->id,
         ]);
+    }
+
+    /**
+     * @param Column $column
+     *
+     * @return JsonResponse
+     */
+    public function delete(Column $column): JsonResponse
+    {
+        $column->delete();
+
+        return response()->json(['status' => 'success']);
     }
 }
