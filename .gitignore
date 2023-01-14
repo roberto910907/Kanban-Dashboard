@@ -17,3 +17,5 @@ yarn-error.log
 /.idea
 /.vscode
 ansible
+.yarn-error.log
+deploy
