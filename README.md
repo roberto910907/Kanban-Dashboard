@@ -13,4 +13,4 @@ The current project aims to create an open-source Kanban Dashboard with some of 
 - [ ] Migrate to Nuxt framework(v3)
 
 ## Screenshot
-![Screenshot](./public/img/screenshot.png)
+![Screenshot](./api/public/img/screenshot.png)

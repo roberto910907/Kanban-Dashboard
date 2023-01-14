@@ -3,9 +3,9 @@
     <div class="flex">
       <p class="grow">Kanban Board</p>
       <button
-          class="button primary"
-          :disabled="creating"
-          @click="exportDatabase"
+        class="button primary"
+        :disabled="creating"
+        @click="exportDatabase"
       >
         <Spinner v-if="creating" class="mr-1"></Spinner>
         {{ exportButtonText }}

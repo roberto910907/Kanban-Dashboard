@@ -3,29 +3,29 @@
     <div class="flex">
       <span class="grow title ml-1">{{ column.title }}</span>
       <Icon
-          icon-name="delete"
-          class="bg-red cursor-pointer"
-          @click="deleteColumn"
+        icon-name="delete"
+        class="bg-red cursor-pointer"
+        @click="deleteColumn"
       ></Icon>
     </div>
 
     <div v-if="column.cards.length" class="flex mt-1">
       <input
-          v-model="search"
-          type="text"
-          placeholder="Search card by title..."
-          class="form-control w-full h-36"
+        v-model="search"
+        type="text"
+        placeholder="Search card by title..."
+        class="form-control w-full h-36"
       />
     </div>
 
     <Draggable
-        item-key="id"
-        :id="`column_${column.id}`"
-        group="cards"
-        :list="filteredCards"
-        @end="updateDraggedCard"
+      :id="`column_${column.id}`"
+      item-key="id"
+      group="cards"
+      :list="filteredCards"
+      @end="updateDraggedCard"
     >
-      <template #item="{element}">
+      <template #item="{ element }">
         <Card :card="element"></Card>
       </template>
     </Draggable>
@@ -35,10 +35,10 @@
     </div>
     <div v-else class="card">
       <textarea
-          v-model="newCard.title"
-          rows="3"
-          class="form-control"
-          @keydown.enter="saveCard"
+        v-model="newCard.title"
+        rows="3"
+        class="form-control"
+        @keydown.enter="saveCard"
       ></textarea>
 
       <div class="flex mt-1">
@@ -71,12 +71,12 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['column-updated', 'column-deleted'])
+const emit = defineEmits(['column-updated', 'column-deleted']);
 
 const filteredCards = computed(() => {
   return search.value
-      ? props.column.cards.filter((card) => card.title.includes(search.value))
-      : props.column.cards;
+    ? props.column.cards.filter((card) => card.title.includes(search.value))
+    : props.column.cards;
 });
 
 async function refreshCards() {
@@ -93,7 +93,10 @@ async function updateCardPosition(event) {
   const cardId = parseInt(event.item.id.split('_')[1], 10);
   const newPosition = event.newIndex;
 
-  const data = await useMyFetch(`/api/cards/update/${cardId}/position`, { method: 'PUT', body: { position: newPosition } });
+  const data = await useMyFetch(`/api/cards/update/${cardId}/position`, {
+    method: 'PUT',
+    body: { position: newPosition },
+  });
 
   if (data.status === 'success') {
     // Show success message here
@@ -107,10 +110,13 @@ async function updateCardColumn(event) {
   const columnId = parseInt(event.to.id.split('_')[1], 10);
   const newPosition = event.newIndex;
 
-  const data = await useMyFetch(`/api/cards/update/${cardId}/column`, { method: 'PUT' , body: {
+  const data = await useMyFetch(`/api/cards/update/${cardId}/column`, {
+    method: 'PUT',
+    body: {
       column_id: columnId,
       position: newPosition,
-    }});
+    },
+  });
 
   if (data.status === 'success') {
     // Show success message here
@@ -128,13 +134,18 @@ function updateDraggedCard(event) {
 }
 
 async function deleteColumn() {
-  await useMyFetch(`/api/columns/${props.column.id}/delete`, { method: 'DELETE'});
+  await useMyFetch(`/api/columns/${props.column.id}/delete`, {
+    method: 'DELETE',
+  });
 
   emit('column-deleted');
 }
 
 async function saveCard() {
-  const data = await useMyFetch(`/api/cards/${props.column.id}/add`, { method: 'POST', body: newCard.value });
+  const data = await useMyFetch(`/api/cards/${props.column.id}/add`, {
+    method: 'POST',
+    body: newCard.value,
+  });
 
   if (data.id) {
     await refreshCards();
