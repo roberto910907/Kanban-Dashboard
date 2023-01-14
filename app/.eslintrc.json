@@ -50,6 +50,8 @@
     ]
   },
   "globals": {
-    "defineNuxtConfig": true
+    "$fetch": true,
+    "defineNuxtConfig": true,
+    "useRuntimeConfig": true
   }
 }

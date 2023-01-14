@@ -1,0 +1,32 @@
+name: kanban-dashboard
+recipe: laravel
+config:
+  via: nginx
+  webroot: api/public
+  database: mysql:8.0
+  php: '8.1'
+
+services:
+  appserver:
+    build_as_root:
+      - apt-get update -y
+      - cd api && composer install
+  database:
+    portforward: 49220
+    run_as_root:
+      - mysql -uroot -e "CREATE DATABASE IF NOT EXISTS kanban_dasboard;"
+  node:
+    type: node:16.13
+    build_as_root:
+      - cd app && yarn install
+
+tooling:
+  redis-cli:
+    service: cache
+  node:
+    service: node
+  npm:
+    service: node
+  yarn:
+    service: node
+    description: "Run Yarn command"

@@ -1,4 +1,8 @@
-ansible
+.ansible
 /.idea
 /.vscode
 /.fleet
+composer.json
+composer.lock
+vendor
+.deploy
