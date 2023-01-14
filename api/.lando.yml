@@ -5,7 +5,6 @@ config:
   webroot: public
   database: mysql:8.0
   php: '8.1'
-  xdebug: false
 
 services:
   appserver:
@@ -15,16 +14,3 @@ services:
     portforward: 49220
     run_as_root:
       - mysql -uroot -e "CREATE DATABASE IF NOT EXISTS kanban_dasboard;"
-  node:
-    type: node:16.13
-    build:
-      - yarn install
-    command: yarn run start
-
-tooling:
-  node:
-    service: node
-  npm:
-    service: node
-  yarn:
-    service: node
