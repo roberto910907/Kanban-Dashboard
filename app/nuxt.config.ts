@@ -1,6 +1,18 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: false,
+  app: {
+    head: {
+      title: 'Kanban Dashboard',
+      bodyAttrs: {
+        class: 'bg-body',
+      },
+      link: [
+        {
+          rel: 'shortcut icon',
+          href: 'favicon.ico',
+        },
+      ],
+    },
+  },
 
   runtimeConfig: {
     public: {
@@ -8,5 +20,9 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['@/assets/css/app.scss'],
+  modules: ['@nuxtjs/tailwindcss'],
+
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.scss',
+  },
 });

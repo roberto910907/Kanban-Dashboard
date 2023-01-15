@@ -1,7 +1,7 @@
 <template>
   <div
     :id="`card_${card.id}`"
-    class="card cursor-pointer"
+    class="my-1 p-2.5 bg-white border text-gray-700 shadow-md cursor-pointer rounded-lg hover:border-gray-400"
     @click="openEditModal"
   >
     <div class="flex">

@@ -8,9 +8,16 @@ The current project aims to create an open-source Kanban Dashboard with some of 
 - app: Nuxt 3 application serving frontend
 
 ## Task List
-- [ ] Refactor application code with TailwindCSS
+- [x] Refactor application code with TailwindCSS
 - [ ] Introduce GraphQL instead of the REST API
-- [ ] Migrate to Nuxt framework(v3)
+- [x] Migrate to Nuxt framework(v3)
+- [ ] Introduce Tailwind Components
+- [ ] Add register page
+- [ ] Add login page
+- [ ] Add multiple dashboards
+- [ ] Protect API with token
+- [ ] Add dashboard filters(date, status, etc)
+- [ ] Add assigned users
 
 ## Screenshot
 ![Screenshot](./api/public/img/screenshot.png)
