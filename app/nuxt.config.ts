@@ -16,7 +16,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      ENV: process.env.ENV,
       CLIENT_API_URL: process.env.CLIENT_API_URL,
+      SENTRY_DSN: process.env.SENTRY_DSN,
     },
   },
 
