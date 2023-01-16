@@ -3,7 +3,7 @@
 
 **Status Page**: https://status.kanbandash.com/
 
-**Docs**: [WIP]
+**Docs**: https://docs.kanbandash.com/
 
 ## Project Scope
 The current project aims to create an open-source Kanban Dashboard with some of the most common features included.
