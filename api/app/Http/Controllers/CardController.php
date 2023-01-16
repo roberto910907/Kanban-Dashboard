@@ -19,12 +19,11 @@ class CardController extends Controller
     public const STATUS_INACTIVE = '0';
 
     /**
-     * @param Request $request
      * @param Column $column
      *
      * @return JsonResponse
      */
-    public function list(Request $request, Column $column): JsonResponse
+    public function list(Column $column): JsonResponse
     {
         $cards = Card::query()
           ->where('column_id', $column->id)
@@ -34,30 +33,6 @@ class CardController extends Controller
         return response()->json([
           'cards' => $cards,
         ]);
-    }
-
-    /**
-     * @param FilterCardRequest $request
-     *
-     * @return Response
-     */
-    public function filterCards(FilterCardRequest $request): Response
-    {
-        $cardsQuery = Card::query()->withTrashed();
-
-        if ($creationDate = $request->get('date')) {
-            $cardsQuery->whereDate('created_at', $creationDate);
-        }
-
-        $status = $request->query('status');
-
-        if ($status === self::STATUS_ACTIVE) {
-            $cardsQuery->whereNull('deleted_at');
-        } elseif ($status === self::STATUS_INACTIVE) {
-            $cardsQuery->whereNotNull('deleted_at');
-        }
-
-        return response($cardsQuery->get());
     }
 
     /**

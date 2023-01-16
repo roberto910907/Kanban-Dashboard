@@ -1,6 +1,8 @@
 # Kanban Dashboard
 **Demo**: https://kanbandash.com/
 
+**Status Page**: https://status.kanbandash.com/
+
 **Docs**: [WIP]
 
 ## Project Scope
@@ -9,6 +11,7 @@ The current project aims to create an open-source Kanban Dashboard with some of 
 ## Structure
 - **api** folder: Laravel 9 application serving a GraphQL endpoint
 - **app** folder: Nuxt 3 application serving frontend
+- **docs** folder: Nuxt Docus serving project documentation
 
 ## Task List
 - [ ] Create documentation site using Nuxt docs package
@@ -26,11 +29,11 @@ The current project aims to create an open-source Kanban Dashboard with some of 
 - [ ] Add assigned users
 
 ## DevOps Tasks
-- [ ] Configure monitoring tools(Sentry, Datadog, Better Uptime)
+- [x] Configure monitoring tools(Sentry, Datadog, Better Uptime)
 - [ ] Activate OPCache
 - [ ] PHP-FPM restart should not be needed
-- [ ] Cloudflare CDN
+- [x] Cloudflare CDN
 - [ ] Register should create a new DO subdomain
 
 ## Screenshot
-![Screenshot](./api/public/img/screenshot.png)
+![Screenshot](./docs/public/screenshot.png)
