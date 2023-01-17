@@ -20,20 +20,21 @@ The current project aims to create an open-source Kanban Dashboard with some of 
 - [x] Migrate to Nuxt framework(v3)
 - [ ] Add new icon library(mdi-icons)
 - [ ] Introduce Tailwind Components
-- [ ] Migrate to multi-tenant database
-- [ ] Add register page
+- [x] Migrate to multi-tenant database
+- [x] Add register page
 - [ ] Add login page
 - [ ] Add multiple dashboards
 - [ ] Protect API with token
 - [ ] Add dashboard filters(date, status, etc)
 - [ ] Add assigned users
+- [ ] Build homepage
 
 ## DevOps Tasks
 - [x] Configure monitoring tools(Sentry, Datadog, Better Uptime)
 - [ ] Activate OPCache
 - [ ] PHP-FPM restart should not be needed
 - [x] Cloudflare CDN
-- [ ] Register should create a new DO subdomain
+- [x] Register should create a new DO subdomain
 
 ## Screenshot
 ![Screenshot](./docs/public/screenshot.png)

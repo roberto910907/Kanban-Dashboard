@@ -1,6 +1,9 @@
 export const useMyFetch = async (url, options = {}) => {
-  const config = useRuntimeConfig();
-  const apiURL = config.public.CLIENT_API_URL;
+  let apiUrl = '';
 
-  return $fetch(url, { baseURL: apiURL, ...options });
+  if (process.client) {
+    apiUrl = window.location.origin;
+  }
+
+  return $fetch(url, { baseURL: apiUrl, ...options });
 };

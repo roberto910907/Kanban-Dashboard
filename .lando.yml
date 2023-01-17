@@ -5,6 +5,8 @@ config:
   webroot: api/public
   database: mysql:8.0
   php: '8.1'
+  config:
+    vhosts: .lando/nginx.conf
 
 services:
   appserver:
@@ -14,11 +16,16 @@ services:
   database:
     portforward: 49220
     run_as_root:
-      - mysql -uroot -e "CREATE DATABASE IF NOT EXISTS kanban_dasboard;"
+      - mysql -uroot -e "CREATE DATABASE IF NOT EXISTS kanban_admin;"
   node:
     type: node:16.13
     build_as_root:
       - cd app && yarn install
+
+proxy:
+  appserver_nginx:
+    - "kanbandash.lndo.site"
+    - "*.kanbandash.lndo.site"
 
 tooling:
   redis-cli:

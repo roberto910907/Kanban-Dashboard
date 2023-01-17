@@ -1,6 +1,5 @@
 import tailwindTypography from '@tailwindcss/typography';
 import tailwindForms from '@tailwindcss/forms';
-import flowbite from 'flowbite';
 
 export default {
   content: [
@@ -21,5 +20,5 @@ export default {
       },
     },
   },
-  plugins: [tailwindTypography, tailwindForms, flowbite],
+  plugins: [tailwindTypography, tailwindForms, require('flowbite')],
 };

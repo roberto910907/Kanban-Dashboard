@@ -4,20 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Card;
 use App\Models\Column;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreCardRequest;
-use App\Http\Requests\FilterCardRequest;
 use App\Http\Requests\UpdateCardRequest;
 use App\Http\Requests\UpdateCardColumnRequest;
 use App\Http\Requests\UpdateCardPositionRequest;
 
 class CardController extends Controller
 {
-    public const STATUS_ACTIVE = '1';
-    public const STATUS_INACTIVE = '0';
-
     /**
      * @param Column $column
      *
