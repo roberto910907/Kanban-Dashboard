@@ -1,7 +1,16 @@
 import tailwindTypography from '@tailwindcss/typography';
 import tailwindForms from '@tailwindcss/forms';
+import flowbite from 'flowbite';
 
 export default {
+  content: [
+    './components/**/*.{js,vue,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './nuxt.config.{js,ts}',
+    './node_modules/flowbite.{js,ts}',
+  ],
   theme: {
     extend: {
       colors: {
@@ -12,5 +21,5 @@ export default {
       },
     },
   },
-  plugins: [tailwindTypography, tailwindForms],
+  plugins: [tailwindTypography, tailwindForms, flowbite],
 };
