@@ -34,6 +34,11 @@ class Account extends BaseTenant implements TenantWithDatabase
         ];
     }
 
+    public function shouldGenerateId(): bool
+    {
+        return false;
+    }
+
     public function domains(): HasMany
     {
         return $this->hasMany(Domain::class);
