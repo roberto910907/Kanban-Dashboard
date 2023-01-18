@@ -1,9 +1,8 @@
-<h2 align="center">
+<p align="center" style="font-size: 40px">
   <a href="https://kanbandash.com" target="_blank">
     Kanban Dashboard
   </a>
-</h2>
-
+</p>
 <p align="center">
   An open-source Kanban Dashboard with some of the most common features included.
 </p>
