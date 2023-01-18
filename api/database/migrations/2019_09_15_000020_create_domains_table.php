@@ -17,11 +17,11 @@ class CreateDomainsTable extends Migration
     {
         Schema::create('domains', function (Blueprint $table) {
             $table->id();
-            $table->uuid('id');
+            $table->uuid();
             $table->string('domain', 255)->unique();
 
             $table->timestamps();
-            $table->foreignUuid('account_id')->constrained('accounts');
+            $table->foreignUuid('account_id')->constrained('accounts', 'uuid');
         });
     }
 

@@ -17,7 +17,7 @@ class CreateTenantsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->uuid('id');
+            $table->uuid();
 
             $table->string('name');
             $table->string('email');
