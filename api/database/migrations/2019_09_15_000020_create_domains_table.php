@@ -20,7 +20,9 @@ class CreateDomainsTable extends Migration
             $table->uuid();
             $table->string('domain', 255)->unique();
 
+            $table->softDeletes();
             $table->timestamps();
+
             $table->foreignId('account_id')->constrained('accounts');
         });
     }
