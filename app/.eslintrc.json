@@ -50,6 +50,7 @@
     ]
   },
   "globals": {
+    "ref": true,
     "$fetch": true,
     "defineNuxtConfig": true,
     "defineNuxtPlugin": true,

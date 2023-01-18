@@ -80,7 +80,7 @@ const CARD_DATA = {
 
 const search = ref('');
 const creating = ref(false);
-const newCard = ref(CARD_DATA);
+const newCard = ref({ ...CARD_DATA });
 
 const props = defineProps({
   column: {

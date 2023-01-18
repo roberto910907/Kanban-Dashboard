@@ -52,7 +52,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { useMyFetch } from '../composables/baseFetch';
 
 const COLUMN_DATA = {
@@ -61,7 +60,7 @@ const COLUMN_DATA = {
 
 const creating = ref(false);
 const columns = ref([]);
-const newColumn = ref(COLUMN_DATA);
+const newColumn = ref({ ...COLUMN_DATA });
 
 async function getColumnList() {
   const data = await useMyFetch('/api/columns/list');
