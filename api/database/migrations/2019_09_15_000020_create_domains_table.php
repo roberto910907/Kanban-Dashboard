@@ -21,7 +21,7 @@ class CreateDomainsTable extends Migration
             $table->string('domain', 255)->unique();
 
             $table->timestamps();
-            $table->foreignUuid('account_id')->constrained('accounts', 'uuid');
+            $table->foreignUuid('account_id')->constrained('accounts');
         });
     }
 
