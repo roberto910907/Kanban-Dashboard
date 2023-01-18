@@ -1,12 +1,27 @@
-# Kanban Dashboard
+<h2 align="center">
+  <a href="https://kanbandash.com" target="_blank">
+    Kanban Dashboard
+  </a>
+</h2>
+
+<p align="center">
+  An open-source Kanban Dashboard with some of the most common features included.
+</p>
+
+------
+
 **Demo**: https://kanbandash.com/
 
 **Status Page**: https://status.kanbandash.com/
 
-**Docs**: https://docs.kanbandash.com/
+**Docs [WIP]**: https://docs.kanbandash.com/
 
-## Project Scope
-The current project aims to create an open-source Kanban Dashboard with some of the most common features included.
+## Tech Stack
+- Laravel v9
+- Nuxt v3
+- VueJS 3
+- GraphQL
+- TailwindCSS
 
 ## Structure
 - **api** folder: Laravel 9 application serving a GraphQL endpoint
@@ -22,12 +37,15 @@ The current project aims to create an open-source Kanban Dashboard with some of 
 - [ ] Introduce Tailwind Components
 - [x] Migrate to multi-tenant database
 - [x] Add register page
+- [ ] Delete cards
 - [ ] Add login page
 - [ ] Add multiple dashboards
 - [ ] Protect API with token
 - [ ] Add dashboard filters(date, status, etc)
 - [ ] Add assigned users
-- [ ] Build homepage
+- [ ] Upload attachments
+- [ ] Add checklist items
+- [ ] Build homepage (domain input redirects to account subdomain)
 
 ## DevOps Tasks
 - [x] Configure monitoring tools(Sentry, Datadog, Better Uptime)
@@ -35,6 +53,7 @@ The current project aims to create an open-source Kanban Dashboard with some of 
 - [ ] PHP-FPM restart should not be needed
 - [x] Cloudflare CDN
 - [x] Register should create a new DO subdomain
+- [ ] Add source maps to Sentry for better traceability
 
 ## Screenshot
 ![Screenshot](./docs/public/screenshot.png)
