@@ -8,8 +8,15 @@
         :key="column.id"
         :column="column"
         @column-updated="(cards) => (column.cards = cards)"
-        @column-deleted="getColumnList"
+        @delete-triggered="showDeleteModal($event)"
       ></Column>
+
+      <ModalDelete
+        :open="openDeleteModal"
+        :item-id="columnIdToDelete"
+        @confirmed="deleteColumn($event)"
+        @close="openDeleteModal = false"
+      ></ModalDelete>
 
       <div
         v-if="!creating"
@@ -17,9 +24,9 @@
         @click="creating = true"
       >
         <span
-          class="w-full my-auto mx-auto px-4 py-1.5 text-blue-500 bg-gray-300 rounded-md hover:underline"
+          class="bg-primary link w-full my-auto mx-auto rounded-md hover:underline"
         >
-          + Add new column
+          + Add New Column
         </span>
       </div>
       <div v-else class="bg-column p-2.5 ml-3 rounded-md w-72 h-fit">
@@ -60,7 +67,14 @@ const COLUMN_DATA = {
 
 const creating = ref(false);
 const columns = ref([]);
+const openDeleteModal = ref(false);
+const columnIdToDelete = ref(0);
 const newColumn = ref({ ...COLUMN_DATA });
+
+function showDeleteModal(columnId) {
+  columnIdToDelete.value = columnId;
+  openDeleteModal.value = true;
+}
 
 async function getColumnList() {
   const data = await useMyFetch('/api/columns/list');
@@ -85,6 +99,16 @@ async function saveColumn() {
 
   newColumn.value = { ...COLUMN_DATA };
   creating.value = false;
+}
+
+async function deleteColumn(columnId) {
+  await useMyFetch(`/api/columns/${columnId}/delete`, {
+    method: 'DELETE',
+  });
+
+  openDeleteModal.value = false;
+
+  await getColumnList();
 }
 
 getColumnList();

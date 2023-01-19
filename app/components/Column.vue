@@ -1,30 +1,36 @@
 <template>
   <div class="bg-column p-2.5 ml-3 rounded-md w-72 h-fit">
     <div class="flex">
-      <span class="grow text-lg text-title font-medium">
+      <span class="grow ml-1 text-md font-bold">
         {{ column.title }}
       </span>
       <Icon
-        icon-name="delete"
-        class="text-red cursor-pointer"
-        @click="deleteColumn"
+        name="mdi-light:delete"
+        class="text-gray-600 hover:bg-gray-300"
+        size="18"
+        @click="emit('delete-triggered', props.column.id)"
       ></Icon>
     </div>
 
-    <div v-if="column.cards.length" class="flex">
+    <div v-if="column.cards.length" class="flex relative">
+      <Icon
+        name="heroicons-outline:magnifying-glass"
+        size="16"
+        class="text-icon absolute top-4 left-2"
+      ></Icon>
       <input
         v-model="search"
         type="text"
-        placeholder="Search card by title..."
-        class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-500 focus:ring-gray-500"
+        placeholder="Search card..."
+        class="search mt-1 block w-full rounded-lg p-2.5 pl-8 text-xs"
       />
     </div>
 
     <Draggable
       :id="`column_${column.id}`"
+      v-model="filteredCards"
       item-key="id"
       group="cards"
-      :list="filteredCards"
       @end="updateDraggedCard"
     >
       <template #item="{ element }">
@@ -33,10 +39,8 @@
     </Draggable>
 
     <div v-if="!creating" class="cursor-pointer mt-3" @click="creating = true">
-      <span
-        class="px-4 py-1.5 underline text-blue-500 hover:bg-gray-300 hover:rounded-md hover:no-underline"
-      >
-        + Add new card
+      <span class="link rounded-md hover:bg-gray-300 hover:underline">
+        + Add New Card
       </span>
     </div>
     <div
@@ -71,7 +75,6 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import Draggable from 'vuedraggable';
 import { useMyFetch } from '../composables/baseFetch';
 
 const CARD_DATA = {
@@ -89,7 +92,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['column-updated', 'column-deleted']);
+const emit = defineEmits(['column-updated', 'delete-triggered']);
 
 const filteredCards = computed(() => {
   return search.value
@@ -149,14 +152,6 @@ function updateDraggedCard(event) {
   } else if (event.pullMode && event.from !== event.to) {
     updateCardColumn(event);
   }
-}
-
-async function deleteColumn() {
-  await useMyFetch(`/api/columns/${props.column.id}/delete`, {
-    method: 'DELETE',
-  });
-
-  emit('column-deleted');
 }
 
 async function saveCard() {

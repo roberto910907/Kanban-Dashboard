@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  body {
+    font-family: Madefor, "Helvetica Neue", Helvetica, Arial, "\30E1\30A4\30EA\30AA", "meiryo", "\30D2\30E9\30AE\30CE\89D2\30B4 pro w3", "hiragino kaku gothic pro", sans-serif;
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 24px;
+    }
+  }
+
+  .icon {
+    @apply hover:cursor-pointer hover:rounded-full hover:bg-gray-200;
+  }
+
+  .bg-primary {
+    background-color: #eaf7ff;
+  }
+
+  .search {
+    background-color: #eaf7ff;
+    border: solid 1px #c1e4fe;
+    font-size: 14px;
+
+    &:hover {
+      background-color: #daeffe;
+    }
+
+    &:focus {
+      outline: 0;
+      color: #3899ec;
+      box-shadow: 0 0 0 3px #aadbfc;
+    }
+
+    &::placeholder {
+      @apply text-icon;
+    }
+  }
+
+  .link {
+    @apply px-4 py-1.5 text-sm font-bold;
+    color: #116dff;
+  }
+
+  .card {
+    @apply my-1 p-2.5 bg-white border shadow-sm cursor-pointer rounded-lg;
+
+    &:hover {
+      @apply bg-gray-50;
+      border-color: transparent;
+      box-shadow: 0 8px 20px 0 rgb(0 6 36 / 16%);
+    }
+  }
+}
+

@@ -32,7 +32,7 @@
 - [x] Refactor application code with TailwindCSS
 - [ ] Introduce GraphQL instead of the REST API
 - [x] Migrate to Nuxt framework(v3)
-- [ ] Add new icon library(mdi-icons)
+- [x] Add new icon library(nuxt-icon)
 - [ ] Introduce Tailwind Components
 - [x] Migrate to multi-tenant database
 - [x] Add register page

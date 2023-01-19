@@ -13,10 +13,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        body: '#f5f5f5',
+        body: '#fff',
         navbar: '#49576b',
-        column: '#e2e4e6',
-        title: '#333333',
+        column: '#dfe5eb',
+        icon: '#7a92a5',
       },
     },
   },

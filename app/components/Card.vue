@@ -1,48 +1,42 @@
 <template>
-  <div
-    :id="`card_${card.id}`"
-    class="my-1 p-2.5 bg-white border text-gray-700 shadow-md cursor-pointer rounded-lg hover:border-gray-400"
-    @click="openEditModal"
-  >
+  <div :id="`card_${card.id}`" class="card" @click.prevent="showEditModal">
     <div class="flex">
-      <span class="grow">{{ card.title }}</span>
-      <span>:::</span>
+      <span class="grow text-sm font-bold">{{ card.title }}</span>
+      <button data-tooltip-target="drag-icon" data-tooltip-placement="right">
+        <Icon name="system-uicons:drag-vertical" class="hover:bg-white"></Icon>
+      </button>
+      <div
+        id="drag-icon"
+        role="tooltip"
+        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+      >
+        Drag card in the same or other column
+        <div class="tooltip-arrow" data-popper-arrow></div>
+      </div>
+    </div>
+    <div class="text-xs mt-1 text-gray-700">
+      {{ card.description }}
     </div>
 
-    <!--    <Modal :name="modalCardId">-->
-    <!--      <div class="pa-30">-->
-    <!--        <div class="title">Card Information (#{{ card.id }})</div>-->
-    <!--        <div class="mt-1">-->
-    <!--          <input-->
-    <!--            v-model="card.title"-->
-    <!--            placeholder="Enter card title..."-->
-    <!--            type="text"-->
-    <!--            class="form-control w-full h-36"-->
-    <!--          />-->
-    <!--        </div>-->
-    <!--        <div class="mt-1">-->
-    <!--          <textarea-->
-    <!--            v-model="card.description"-->
-    <!--            rows="5"-->
-    <!--            placeholder="Card description..."-->
-    <!--            class="form-control w-full"-->
-    <!--          ></textarea>-->
-    <!--        </div>-->
-    <!--        <div class="flex mt-1">-->
-    <!--          <button class="button primary" @click="updateCard">-->
-    <!--            Update Card-->
-    <!--          </button>-->
-    <!--          <span class="cursor-pointer ml-1 link" @click="closeModal">-->
-    <!--            Cancel-->
-    <!--          </span>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </Modal>-->
+    <ModalEdit
+      :open="openEditModal"
+      :item="card"
+      @confirmed="updateCard($event)"
+      @close="closeModal"
+    ></ModalEdit>
+
+    <NotificationSuccess
+      :show="showNotification"
+      title="Successfully Saved!"
+      message="Card information has been updated."
+      @close="showNotification = false"
+    ></NotificationSuccess>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { onMounted } from 'vue';
+import { initTooltips } from 'flowbite';
 import { useMyFetch } from '../composables/baseFetch';
 
 const props = defineProps({
@@ -52,26 +46,31 @@ const props = defineProps({
   },
 });
 
-const modalCardId = computed(() => {
-  return `modal_card_${props.card.id}`;
-});
+const openEditModal = ref(false);
+const showNotification = ref(false);
 
-function openEditModal() {
-  $modal.show(modalCardId);
+function showEditModal() {
+  openEditModal.value = true;
 }
 
 function closeModal() {
-  $modal.hide(modalCardId);
+  openEditModal.value = false;
 }
 
-async function updateCard() {
-  const data = await useMyFetch(`/api/cards/update/${props.card.id}`, {
+async function updateCard(card) {
+  const data = await useMyFetch(`/api/cards/update/${card.id}`, {
     method: 'PUT',
-    body: props.card,
+    body: card,
   });
 
   if (data.status === 'success') {
     closeModal();
+
+    showNotification.value = true;
   }
 }
+
+onMounted(() => {
+  initTooltips();
+});
 </script>

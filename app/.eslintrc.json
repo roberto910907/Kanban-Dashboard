@@ -52,6 +52,7 @@
   "globals": {
     "ref": true,
     "$fetch": true,
+    "defineAppConfig": true,
     "defineNuxtConfig": true,
     "defineNuxtPlugin": true,
     "useRuntimeConfig": true
