@@ -11,3 +11,6 @@ Homestead.json
 Homestead.yaml
 auth.json
 !/composer.lock
+_lighthouse_ide_helper.php
+programmatic-types.graphql
+schema-directives.graphql

@@ -13,13 +13,12 @@
 </template>
 
 <script setup>
-const boards = ref([]);
+import { storeToRefs } from 'pinia';
+import { useBoardStore } from '../../stores/useBoardStore';
 
-async function getBoardList() {
-  const data = await useMyFetch('/api/boards/list');
+const store = useBoardStore();
 
-  boards.value = data.boards;
-}
+const { boards } = storeToRefs(store);
 
-getBoardList();
+store.getBoardList();
 </script>

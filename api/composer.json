@@ -9,6 +9,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/tinker": "^2.7",
+        "mll-lab/laravel-graphiql": "^1.0",
         "nuwave/lighthouse": "^5.70",
         "sentry/sentry-laravel": "^3.1",
         "stancl/tenancy": "^3.6",

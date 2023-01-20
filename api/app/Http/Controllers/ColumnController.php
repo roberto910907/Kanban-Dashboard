@@ -42,7 +42,7 @@ class ColumnController extends Controller
         $newColumn = Column::create([
             'position' => $lastPosition + 1,
             'title' => $request->validated('title'),
-            'board_id' => $board->id,
+            'board_id' => $board->uuid,
         ]);
 
         return response()->json([

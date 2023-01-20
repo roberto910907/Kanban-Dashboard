@@ -31,9 +31,22 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'nuxt-icon',
+    '@nuxtjs/apollo',
+    '@pinia/nuxt',
+  ],
 
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.scss',
+  },
+
+  apollo: {
+    clients: {
+      default: {
+        httpEndpoint: '/api/graphql',
+      },
+    },
   },
 });

@@ -8,6 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxtjs/apollo": "^5.0.0-alpha.5",
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.6.0",
@@ -25,6 +26,7 @@
     "@headlessui/vue": "^1.7.7",
     "@heroicons/vue": "^2.0.13",
     "@nuxtjs/tailwindcss": "^6.2.0",
+    "@pinia/nuxt": "^0.4.6",
     "@sentry/browser": "^7.30.0",
     "@sentry/tracing": "^7.30.0",
     "@sentry/vue": "^7.30.0",
@@ -32,6 +34,7 @@
     "@tailwindcss/typography": "^0.5.9",
     "axios": "^1.2.2",
     "flowbite": "^1.6.2",
+    "pinia": "^2.0.29",
     "sass": "^1.57.1",
     "vuedraggable": "^4.1.0"
   }

@@ -59,13 +59,19 @@
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia';
+import { useColumnStore } from '../../stores/useColumnStore';
+
+const store = useColumnStore();
+const { columns } = storeToRefs(store);
+
 const route = useRoute();
 const COLUMN_DATA = {
   title: '',
 };
 
 const creating = ref(false);
-const columns = ref([]);
+const boardUuid = route.params.id;
 const openDeleteModal = ref(false);
 const columnIdToDelete = ref(0);
 const newColumn = ref({ ...COLUMN_DATA });
@@ -75,16 +81,8 @@ function showDeleteModal(columnId) {
   openDeleteModal.value = true;
 }
 
-async function getColumnList() {
-  const boardUuid = route.params.id;
-  const data = await useMyFetch(`/api/columns/list/${boardUuid}`);
-
-  columns.value = data.columns;
-}
-
 async function saveColumn() {
   try {
-    const boardUuid = route.params.id;
     const data = await useMyFetch(`/api/columns/add/${boardUuid}`, {
       method: 'POST',
       body: newColumn.value,
@@ -92,7 +90,7 @@ async function saveColumn() {
 
     // Column successfully created
     if (data.id) {
-      await getColumnList();
+      await store.getColumnList();
     }
   } catch (error) {
     // Show user UI error notification
@@ -109,8 +107,8 @@ async function deleteColumn(columnId) {
 
   openDeleteModal.value = false;
 
-  await getColumnList();
+  await store.getColumnList();
 }
 
-getColumnList();
+store.getColumnList();
 </script>

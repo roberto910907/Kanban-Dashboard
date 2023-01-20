@@ -16,12 +16,14 @@ return new class extends Migration
         Schema::create('cards', function (Blueprint $table) {
             // Columns
             $table->id();
+            $table->uuid()->index();
+
             $table->string('title');
             $table->text('description')->nullable();
             $table->integer('position');
 
             // Foreign keys
-            $table->foreignId('column_id')->constrained('columns');
+            $table->foreignUuid('column_id')->constrained('columns', 'uuid');
 
             // Timestamps
             $table->timestamps();

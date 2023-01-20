@@ -16,8 +16,12 @@ return new class extends Migration
         Schema::create('columns', function (Blueprint $table) {
             // Columns
             $table->id();
+            $table->uuid()->index();
+
             $table->string('title');
             $table->integer('position');
+
+            $table->foreignUuid('board_id')->constrained('boards', 'uuid');
 
             // Timestamps
             $table->timestamps();

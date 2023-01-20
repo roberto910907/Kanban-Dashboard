@@ -13,8 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('columns', function (Blueprint $table) {
-            $table->foreignId('board_id')->constrained('boards');
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->uuid()->index();
+
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->datetime('email_verified_at');
+
+            $table->softdeletes();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('columns', function (Blueprint $table) {
-            $table->dropForeign('board_id');
-        });
+        Schema::dropIfExists('users');
     }
 };
