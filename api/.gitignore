@@ -10,4 +10,4 @@
 Homestead.json
 Homestead.yaml
 auth.json
-deploy
+!/composer.lock

@@ -685,7 +685,7 @@ const solutions = [
   },
   {
     name: 'Live Chat',
-    description: "Your customers' data will be safe and secure.",
+    description: 'Your customers\' data will be safe and secure.',
     href: '#',
     icon: ChatBubbleLeftRightIcon,
   },
