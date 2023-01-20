@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('columns', function (Blueprint $table) {
-            // Columns
+        Schema::create('boards', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->integer('position');
+            $table->uuid();
 
-            // Timestamps
+            $table->string('name');
+            $table->boolean('is_private')->default(true);
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('columns');
+        Schema::dropIfExists('boards');
     }
 };

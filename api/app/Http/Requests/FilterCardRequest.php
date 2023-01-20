@@ -14,8 +14,8 @@ class FilterCardRequest extends FormRequest
     public function rules(): array
     {
         return [
-          'date' => 'nullable|date:Y-m-d',
-          'active' => 'nullable|integer',
+            'date' => 'nullable|date:Y-m-d',
+            'active' => 'nullable|integer',
         ];
     }
 }

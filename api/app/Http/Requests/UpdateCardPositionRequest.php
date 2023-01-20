@@ -12,7 +12,7 @@ class UpdateCardPositionRequest extends FormRequest
     public function rules(): array
     {
         return [
-          'position' => 'required|integer',
+            'position' => 'required|integer',
         ];
     }
 }

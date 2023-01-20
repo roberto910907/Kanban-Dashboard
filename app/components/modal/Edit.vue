@@ -109,7 +109,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
 import {
   Dialog,
   DialogPanel,

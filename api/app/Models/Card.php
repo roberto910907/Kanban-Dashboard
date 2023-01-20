@@ -13,15 +13,15 @@ class Card extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-      'title',
-      'position',
-      'description',
-      'column_id',
+        'title',
+        'position',
+        'description',
+        'column_id',
     ];
 
     protected $casts = [
-      'created_at' => 'datetime:Y-m-d H:i:s',
-      'updated_at' => 'datetime:Y-m-d H:i:s',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     public function scopeOrderByPosition(Builder $query): void

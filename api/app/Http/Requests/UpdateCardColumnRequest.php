@@ -12,8 +12,8 @@ class UpdateCardColumnRequest extends FormRequest
     public function rules(): array
     {
         return [
-          'position' => 'required|integer',
-          'column_id' => 'required|integer',
+            'position' => 'required|integer',
+            'column_id' => 'required|integer',
         ];
     }
 }

@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Stancl\Tenancy\Contracts\TenantWithDatabase;
 use Stancl\Tenancy\Database\Concerns\HasDatabase;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Stancl\Tenancy\Database\Models\Tenant as BaseTenant;
 
 class Account extends BaseTenant implements TenantWithDatabase
@@ -15,10 +15,10 @@ class Account extends BaseTenant implements TenantWithDatabase
     protected $table = 'accounts';
 
     protected $fillable = [
-      'uuid',
-      'name',
-      'email',
-      'database',
+        'uuid',
+        'name',
+        'email',
+        'database',
     ];
 
     public function getTenantKeyName(): string
@@ -29,11 +29,11 @@ class Account extends BaseTenant implements TenantWithDatabase
     public static function getCustomColumns(): array
     {
         return [
-          'id',
-          'uuid',
-          'name',
-          'email',
-          'database',
+            'id',
+            'uuid',
+            'name',
+            'email',
+            'database',
         ];
     }
 

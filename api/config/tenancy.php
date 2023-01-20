@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Models\Account;
 use App\Models\Domain;
+use App\Models\Account;
 
 return [
     'tenant_model' => Account::class,
@@ -17,7 +17,7 @@ return [
      * Only relevant if you're using the domain or subdomain identification middleware.
      */
     'central_domains' => [
-        env('APP_DOMAIN')
+        env('APP_DOMAIN'),
     ],
 
     /**

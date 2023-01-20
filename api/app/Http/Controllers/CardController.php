@@ -25,7 +25,7 @@ class CardController extends Controller
           ->get();
 
         return response()->json([
-          'cards' => $cards,
+            'cards' => $cards,
         ]);
     }
 
@@ -45,13 +45,13 @@ class CardController extends Controller
         $lastPosition = $lastCard->position ?? 0;
 
         $newCard = Card::create([
-          'position' => $lastPosition + 1,
-          'column_id' => $column->id,
-          'title' => $request->validated('title'),
+            'position' => $lastPosition + 1,
+            'column_id' => $column->id,
+            'title' => $request->validated('title'),
         ]);
 
         return response()->json([
-          'id' => $newCard->id,
+            'id' => $newCard->id,
         ]);
     }
 
@@ -64,8 +64,8 @@ class CardController extends Controller
     public function update(UpdateCardRequest $request, Card $card): JsonResponse
     {
         $card->update([
-          'title' => $request->validated('title'),
-          'description' => $request->validated('description'),
+            'title' => $request->validated('title'),
+            'description' => $request->validated('description'),
         ]);
 
         return response()->json(['status' => 'success']);
@@ -93,8 +93,8 @@ class CardController extends Controller
     public function updateColumn(UpdateCardColumnRequest $request, Card $card): JsonResponse
     {
         $card->update([
-          'column_id' => $request->validated('column_id'),
-          'position' => $request->validated('position'),
+            'column_id' => $request->validated('column_id'),
+            'position' => $request->validated('position'),
         ]);
 
         return response()->json(['status' => 'success']);

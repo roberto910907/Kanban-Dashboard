@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ColumnController;
 use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -27,10 +28,14 @@ Route::middleware([
 ])
   ->prefix('api')
   ->group(function () {
+      Route::controller(BoardController::class)->prefix('boards')->group(function () {
+          Route::get('list', 'list')->name('board.list');
+      });
+
       Route::controller(ColumnController::class)->prefix('columns')->group(function () {
-          Route::get('list', 'list')->name('column.list');
-          Route::post('add', 'store')->name('column.store');
-          Route::delete('/{column}/delete', 'delete')->name('column.delete');
+          Route::get('list/{board:uuid}', 'list')->name('column.list');
+          Route::post('add/{board:uuid}', 'store')->name('column.store');
+          Route::delete('delete/{column}', 'delete')->name('column.delete');
       });
 
       Route::controller(CardController::class)->prefix('cards')->group(function () {

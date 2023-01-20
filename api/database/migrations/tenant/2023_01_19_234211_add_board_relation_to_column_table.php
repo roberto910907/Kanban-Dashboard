@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('columns', function (Blueprint $table) {
-            // Columns
-            $table->id();
-            $table->string('title');
-            $table->integer('position');
-
-            // Timestamps
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('columns', function (Blueprint $table) {
+            $table->foreignId('board_id')->constrained('boards');
         });
     }
 
@@ -32,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('columns');
+        Schema::table('columns', function (Blueprint $table) {
+            $table->dropForeign('board_id');
+        });
     }
 };

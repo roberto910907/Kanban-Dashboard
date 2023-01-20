@@ -30,6 +30,7 @@
 ## Task List
 - [ ] Create documentation site using Nuxt docs package
 - [x] Refactor application code with TailwindCSS
+- [ ] Refactor application code with Pinia(store management)
 - [ ] Introduce GraphQL instead of the REST API
 - [x] Migrate to Nuxt framework(v3)
 - [x] Add new icon library(nuxt-icon)
