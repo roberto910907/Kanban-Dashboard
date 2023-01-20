@@ -34,12 +34,12 @@
 - [ ] Introduce GraphQL instead of the REST API
 - [x] Migrate to Nuxt framework(v3)
 - [x] Add new icon library(nuxt-icon)
-- [ ] Introduce Tailwind Components
+- [x] Introduce Tailwind Components
 - [x] Migrate to multi-tenant database
 - [x] Add register page
 - [ ] Delete cards
 - [ ] Add login page
-- [ ] Add multiple dashboards
+- [x] Add multiple dashboards
 - [ ] Protect API with token
 - [ ] Add dashboard filters(date, status, etc)
 - [ ] Add assigned users
