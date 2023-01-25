@@ -39,6 +39,10 @@ export default defineNuxtConfig({
     'nuxt-lodash',
   ],
 
+  build: {
+    transpile: ['@heroicons/vue'],
+  },
+
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.scss',
   },
