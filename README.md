@@ -1,7 +1,5 @@
 <p align="center" style="font-size: 40px">
-  <a href="https://kanbandash.com" target="_blank">
-    Kanban Dashboard
-  </a>
+  Kanban Dashboard
 </p>
 <p align="center">
   An open-source Kanban Dashboard with some of the most common features included.
@@ -27,7 +25,7 @@
 - **app** folder: Nuxt 3 application serving frontend
 - **docs** folder: Nuxt Docus serving project documentation
 
-## Task List
+## Development Tasks
 - [ ] Create documentation site using Nuxt docs package
 - [x] Refactor application code with TailwindCSS
 - [x] Refactor application code with Pinia(store management)
@@ -46,6 +44,11 @@
 - [ ] Upload attachments
 - [ ] Add checklist items
 - [x] Build homepage (domain input redirects to account subdomain)
+
+## Test Coverage
+- [ ] Unit tests
+- [ ] E2E tests using Laravel Dusk
+- [ ] Frontend unit tests
 
 ## DevOps Tasks
 - [x] Configure monitoring tools(Sentry, Datadog, Better Uptime)
