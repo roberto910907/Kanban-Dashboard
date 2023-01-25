@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Card extends BaseModel
 {
     protected $fillable = [
-        'title',
-        'position',
-        'description',
-        'column_id',
+      'title',
+      'position',
+      'description',
+      'column_id',
     ];
 
     public function scopeOrderByPosition(Builder $query): void
@@ -22,5 +22,12 @@ class Card extends BaseModel
     public function column(): BelongsTo
     {
         return $this->belongsTo(Column::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (Card $card) {
+            $card->position = 100; // TODO: implement card position
+        });
     }
 }

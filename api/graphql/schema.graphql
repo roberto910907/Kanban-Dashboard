@@ -24,7 +24,22 @@ type Query {
 
     columns(
         board_id: String @eq
-    ): [Column!]! @paginate(defaultCount: 10)
+    ): [Column!]! @paginate(defaultCount: 10) @orderBy(column: "position", direction: ASC)
+
+    cards(
+        column_id: String @eq
+    ): [Card!]! @paginate(defaultCount: 10) @orderBy(column: "position", direction: ASC)
+}
+
+type Mutation {
+    createColumn(title: String!, board_id: String!): Column @create
+    deleteColumn(id: String!): Column @delete
+
+    createCard(title: String!, column_id: String!): Card @create
+    updateCard(id: ID!, title: String!, description: String): Card @update
+    updateCardPosition(id: ID!, position: Int): Card @update
+    updateCardColumn(id: ID!, position: Int, column_id: String!): Card @update
+    deleteCard(id: String!): Card @delete
 }
 
 "Account of a person who utilizes this application."
@@ -74,6 +89,8 @@ type Column {
     created_at: DateTime!
 
     updated_at: DateTime!
+
+    cards: [Card]! @orderBy(column: "position", direction: ASC)
 }
 
 type Card {
@@ -84,6 +101,8 @@ type Card {
     title: String!
 
     position: Int!
+
+    description: String
 
     created_at: DateTime!
 

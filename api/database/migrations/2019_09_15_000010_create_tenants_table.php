@@ -19,8 +19,7 @@ class CreateTenantsTable extends Migration
             $table->id();
             $table->uuid();
 
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('company_name');
             $table->string('database')->unique();
             $table->json('data')->nullable();
 

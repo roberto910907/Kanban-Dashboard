@@ -7,7 +7,6 @@
         >
           <div class="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
-              <span class="sr-only">Your Company</span>
               <img
                 class="h-8 w-auto sm:h-10"
                 src="https://tailwindui.com/img/logos/mark.svg?from-color=purple&from-shade=600&to-color=indigo&to-shade=600&toShade=600"
@@ -31,7 +30,7 @@
                   'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
                 ]"
               >
-                <span>Solutions</span>
+                <span>Documentation</span>
                 <ChevronDownIcon
                   :class="[
                     open ? 'text-gray-600' : 'text-gray-400',
@@ -91,13 +90,16 @@
             <a
               href="#"
               class="text-base font-medium text-gray-500 hover:text-gray-900"
-              >Pricing</a
             >
+              Pricing
+            </a>
             <a
-              href="#"
+              target="_blank"
+              href="https://github.com/roberto910907/Kanban-Dashboard"
               class="text-base font-medium text-gray-500 hover:text-gray-900"
-              >Partners</a
             >
+              GitHub
+            </a>
             <a
               href="#"
               class="text-base font-medium text-gray-500 hover:text-gray-900"
@@ -113,8 +115,10 @@
             <a
               href="#"
               class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
-              >Sign up</a
+              @click.prevent="openRegisterModal"
             >
+              Sign up
+            </a>
           </div>
         </div>
 
@@ -180,8 +184,9 @@
                   <a
                     href="#"
                     class="text-base font-medium text-gray-900 hover:text-gray-700"
-                    >Pricing</a
                   >
+                    Pricing
+                  </a>
                   <a
                     href="#"
                     class="text-base font-medium text-gray-900 hover:text-gray-700"
@@ -211,6 +216,46 @@
           </PopoverPanel>
         </transition>
       </Popover>
+
+      <TransitionRoot as="template" :show="open">
+        <Dialog as="div" class="relative z-10" @close="open = false">
+          <TransitionChild
+            as="template"
+            enter="ease-out duration-300"
+            enter-from="opacity-0"
+            enter-to="opacity-100"
+            leave="ease-in duration-200"
+            leave-from="opacity-100"
+            leave-to="opacity-0"
+          >
+            <div
+              class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+            />
+          </TransitionChild>
+
+          <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div
+              class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+            >
+              <TransitionChild
+                as="template"
+                enter="ease-out duration-300"
+                enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enter-to="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leave-from="opacity-100 translate-y-0 sm:scale-100"
+                leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <DialogPanel
+                  class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl sm:p-6"
+                >
+                  <AuthRegister></AuthRegister>
+                </DialogPanel>
+              </TransitionChild>
+            </div>
+          </div>
+        </Dialog>
+      </TransitionRoot>
     </header>
 
     <main>
@@ -650,6 +695,10 @@ import {
   PopoverButton,
   PopoverGroup,
   PopoverPanel,
+  Dialog,
+  DialogPanel,
+  TransitionChild,
+  TransitionRoot,
 } from '@headlessui/vue';
 import {
   ArrowUturnLeftIcon,
@@ -668,6 +717,12 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon } from '@heroicons/vue/20/solid';
+
+const open = ref(false);
+
+function openRegisterModal() {
+  open.value = true;
+}
 
 const solutions = [
   {
@@ -691,7 +746,7 @@ const solutions = [
   },
   {
     name: 'Knowledge Base',
-    description: "Connect with third-party tools that you're already using.",
+    description: 'Connect with third-party tools that you\'re already using.',
     href: '#',
     icon: QuestionMarkCircleIcon,
   },

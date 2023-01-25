@@ -34,8 +34,10 @@
     "@tailwindcss/typography": "^0.5.9",
     "axios": "^1.2.2",
     "flowbite": "^1.6.2",
+    "nuxt-lodash": "^2.4.1",
     "pinia": "^2.0.29",
     "sass": "^1.57.1",
+    "vee-validate": "^4.7.3",
     "vuedraggable": "^4.1.0"
   }
 }

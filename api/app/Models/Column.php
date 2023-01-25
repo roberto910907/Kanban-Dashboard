@@ -20,6 +20,16 @@ class Column extends BaseModel
 
     public function cards(): HasMany
     {
-        return $this->hasMany(Card::class);
+        return $this->hasMany(Card::class, 'column_id', 'uuid');
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (Column $column) {
+            $lastColumn = self::query()->orderBy('position', 'desc')->first();
+            $lastPosition = $lastColumn->position ?? 0;
+
+            $column->position = $lastPosition + 1;
+        });
     }
 }

@@ -8,7 +8,7 @@
         name="mdi-light:delete"
         class="text-gray-600 hover:bg-gray-300"
         size="18"
-        @click="emit('delete-triggered', props.column.id)"
+        @click="columnStore.showDeleteModal(column.id)"
       ></Icon>
     </div>
 
@@ -27,9 +27,9 @@
     </div>
 
     <Draggable
-      :id="`column_${column.id}`"
+      :id="`column_${column.uuid}`"
       v-model="filteredCards"
-      item-key="id"
+      item-key="uuid"
       group="cards"
       @end="updateDraggedCard"
     >
@@ -74,16 +74,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useMyFetch } from '../composables/baseFetch';
-
-const CARD_DATA = {
-  title: '',
-};
-
-const search = ref('');
-const creating = ref(false);
-const newCard = ref({ ...CARD_DATA });
+import { storeToRefs } from 'pinia';
+import { useCardStore } from '../stores/useCardStore';
+import { useColumnStore } from '../stores/useColumnStore';
 
 const props = defineProps({
   column: {
@@ -92,7 +85,12 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['column-updated', 'delete-triggered']);
+const cardStore = useCardStore();
+const columnStore = useColumnStore();
+
+const search = ref('');
+const creating = ref(false);
+const { newCard } = storeToRefs(cardStore);
 
 const filteredCards = computed(() => {
   return search.value
@@ -100,71 +98,17 @@ const filteredCards = computed(() => {
     : props.column.cards;
 });
 
-async function refreshCards() {
-  try {
-    const data = await useMyFetch(`/api/cards/${props.column.id}/list`);
-
-    emit('column-updated', data.cards);
-  } catch (error) {
-    // Show UI error notification
-  }
-}
-
-async function updateCardPosition(event) {
-  const cardId = parseInt(event.item.id.split('_')[1], 10);
-  const newPosition = event.newIndex;
-
-  const data = await useMyFetch(`/api/cards/update/${cardId}/position`, {
-    method: 'PUT',
-    body: { position: newPosition },
-  });
-
-  if (data.status === 'success') {
-    // Show success message here
-
-    await refreshCards();
-  }
-}
-
-async function updateCardColumn(event) {
-  const cardId = parseInt(event.item.id.split('_')[1], 10);
-  const columnId = parseInt(event.to.id.split('_')[1], 10);
-  const newPosition = event.newIndex;
-
-  const data = await useMyFetch(`/api/cards/update/${cardId}/column`, {
-    method: 'PUT',
-    body: {
-      column_id: columnId,
-      position: newPosition,
-    },
-  });
-
-  if (data.status === 'success') {
-    // Show success message here
-
-    await refreshCards();
-  }
-}
-
 function updateDraggedCard(event) {
   if (event.from === event.to) {
-    updateCardPosition(event);
+    cardStore.updateCardPosition(event);
   } else if (event.pullMode && event.from !== event.to) {
-    updateCardColumn(event);
+    cardStore.updateCardColumn(event);
   }
 }
 
 async function saveCard() {
-  const data = await useMyFetch(`/api/cards/${props.column.id}/add`, {
-    method: 'POST',
-    body: newCard.value,
-  });
+  await cardStore.createCard(props.column.uuid);
 
-  if (data.id) {
-    await refreshCards();
-  }
-
-  newCard.value = { ...CARD_DATA };
   creating.value = false;
 }
 </script>

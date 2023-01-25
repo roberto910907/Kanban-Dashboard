@@ -36,6 +36,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@nuxtjs/apollo',
     '@pinia/nuxt',
+    'nuxt-lodash',
   ],
 
   tailwindcss: {

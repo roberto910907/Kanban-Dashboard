@@ -15,10 +15,9 @@ class Account extends BaseTenant implements TenantWithDatabase
     protected $table = 'accounts';
 
     protected $fillable = [
-        'uuid',
-        'name',
-        'email',
-        'database',
+      'uuid',
+      'database',
+      'company_name',
     ];
 
     public function getTenantKeyName(): string
@@ -29,11 +28,10 @@ class Account extends BaseTenant implements TenantWithDatabase
     public static function getCustomColumns(): array
     {
         return [
-            'id',
-            'uuid',
-            'name',
-            'email',
-            'database',
+          'id',
+          'uuid',
+          'database',
+          'company_name',
         ];
     }
 

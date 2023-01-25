@@ -4,7 +4,7 @@ config:
   via: nginx
   webroot: api/public
   database: mysql:8.0
-  php: '8.1'
+  php: '8.2'
   config:
     vhosts: .lando/nginx.conf
 

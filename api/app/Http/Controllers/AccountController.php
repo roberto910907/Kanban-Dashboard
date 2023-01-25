@@ -3,39 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Route;
+use App\Http\Requests\StoreAccountRequest;
+use Stancl\Tenancy\Exceptions\TenantCouldNotBeIdentifiedById;
 
 class AccountController extends Controller
 {
     /**
-     * TODO: Add a form request with domain validation.
+     * @param StoreAccountRequest $request
      *
-     * @param Request $request
+     * @throws TenantCouldNotBeIdentifiedById
      *
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreAccountRequest $request): JsonResponse
     {
         $account = Account::create([
-            'name' => $request->request->get('name'),
-            'email' => $request->request->get('email'),
-            'database' => $request->request->get('domain'),
+          'database' => $request->validated('domain'),
+          'company_name' => $request->validated('company'),
         ]);
 
         $account->domains()->create([
-            'domain' => $request->request->get('domain'),
+          'domain' => $request->validated('domain'),
         ]);
 
+//        tenancy()->initialize($request->validated('domain'));
+//
+//        User::create([
+//          'name' => $request->validated('name'),
+//          'email' => $request->validated('email'),
+//        ]);
+
         return response()->json([
-            'success' => true,
-            'accountUrl' => sprintf(
-                '%s://%s.%s',
-                Route::getCurrentRequest()->getScheme(),
-                $request->get('domain'),
-                Route::getCurrentRequest()->getHost()
-            ),
+          'success' => true,
+          'accountUrl' => sprintf(
+            '%s://%s.%s',
+            Route::getCurrentRequest()->getScheme(),
+            $request->get('domain'),
+            Route::getCurrentRequest()->getHost()
+          ),
         ]);
     }
 }

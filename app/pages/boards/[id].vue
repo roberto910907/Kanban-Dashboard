@@ -5,18 +5,30 @@
     <div class="flex flex-row mt-1">
       <Column
         v-for="column in columns"
-        :key="column.id"
+        :key="column.uuid"
         :column="column"
-        @column-updated="(cards) => (column.cards = cards)"
-        @delete-triggered="showDeleteModal($event)"
+        @card-added="(card) => column.cards.push(card)"
       ></Column>
 
       <ModalDelete
         :open="openDeleteModal"
-        :item-id="columnIdToDelete"
-        @confirmed="deleteColumn($event)"
+        @confirmed="columnStore.deleteColumn()"
         @close="openDeleteModal = false"
       ></ModalDelete>
+
+      <ModalEdit
+        :open="openEditModal"
+        :item="editCard"
+        @confirmed="cardStore.updateCard($event)"
+        @close="cardStore.closeModal"
+      ></ModalEdit>
+
+      <NotificationSuccess
+        :show="showNotification"
+        title="Successfully Saved!"
+        message="Card information has been updated."
+        @close="showNotification = false"
+      ></NotificationSuccess>
 
       <div
         v-if="!creating"
@@ -35,14 +47,14 @@
           placeholder="Enter column title..."
           type="text"
           class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-500 focus:ring-gray-500"
-          @keydown.enter="saveColumn"
+          @keydown.enter="columnStore.createColumn()"
         />
 
         <div class="flex mt-2">
           <button
             type="button"
             class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            @click.prevent="saveColumn"
+            @click.prevent="columnStore.createColumn()"
           >
             Save Column
           </button>
@@ -61,54 +73,15 @@
 <script setup>
 import { storeToRefs } from 'pinia';
 import { useColumnStore } from '../../stores/useColumnStore';
+import { useCardStore } from '../../stores/useCardStore';
 
-const store = useColumnStore();
-const { columns } = storeToRefs(store);
+const cardStore = useCardStore();
+const columnStore = useColumnStore();
 
-const route = useRoute();
-const COLUMN_DATA = {
-  title: '',
-};
+const { creating, columns, newColumn, openDeleteModal } =
+  storeToRefs(columnStore);
 
-const creating = ref(false);
-const boardUuid = route.params.id;
-const openDeleteModal = ref(false);
-const columnIdToDelete = ref(0);
-const newColumn = ref({ ...COLUMN_DATA });
+const { editCard, openEditModal, showNotification } = storeToRefs(cardStore);
 
-function showDeleteModal(columnId) {
-  columnIdToDelete.value = columnId;
-  openDeleteModal.value = true;
-}
-
-async function saveColumn() {
-  try {
-    const data = await useMyFetch(`/api/columns/add/${boardUuid}`, {
-      method: 'POST',
-      body: newColumn.value,
-    });
-
-    // Column successfully created
-    if (data.id) {
-      await store.getColumnList();
-    }
-  } catch (error) {
-    // Show user UI error notification
-  }
-
-  newColumn.value = { ...COLUMN_DATA };
-  creating.value = false;
-}
-
-async function deleteColumn(columnId) {
-  await useMyFetch(`/api/columns/delete/${columnId}`, {
-    method: 'DELETE',
-  });
-
-  openDeleteModal.value = false;
-
-  await store.getColumnList();
-}
-
-store.getColumnList();
+columnStore.getColumnList();
 </script>

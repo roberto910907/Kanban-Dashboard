@@ -30,8 +30,8 @@
 ## Task List
 - [ ] Create documentation site using Nuxt docs package
 - [x] Refactor application code with TailwindCSS
-- [ ] Refactor application code with Pinia(store management)
-- [ ] Introduce GraphQL instead of the REST API
+- [x] Refactor application code with Pinia(store management)
+- [x] Introduce GraphQL instead of the REST API
 - [x] Migrate to Nuxt framework(v3)
 - [x] Add new icon library(nuxt-icon)
 - [x] Introduce Tailwind Components
@@ -45,7 +45,7 @@
 - [ ] Add assigned users
 - [ ] Upload attachments
 - [ ] Add checklist items
-- [ ] Build homepage (domain input redirects to account subdomain)
+- [x] Build homepage (domain input redirects to account subdomain)
 
 ## DevOps Tasks
 - [x] Configure monitoring tools(Sentry, Datadog, Better Uptime)
