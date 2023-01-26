@@ -58,5 +58,10 @@
 - [x] Register should create a new DO subdomain
 - [ ] Add source maps to Sentry for better traceability
 
+## Nice-to-have
+- [ ] Typescript rewrite
+- [ ] Progressive Web App + Push Notifications
+- [ ] Full text search (Algolia / MeiliSearch)
+
 ## Screenshot
 ![Screenshot](./docs/public/screenshot.png)
