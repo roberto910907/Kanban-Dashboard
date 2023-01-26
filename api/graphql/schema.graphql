@@ -35,6 +35,9 @@ type Mutation {
     createColumn(title: String!, board_id: String!): Column @create
     deleteColumn(id: String!): Column @delete
 
+    createBoard(name: String!, is_private: Boolean!): Board @create
+    deleteBoard(id: String!): Board @delete
+
     createCard(title: String!, column_id: String!): Card @create
     updateCard(id: ID!, title: String!, description: String): Card @update
     updateCardPosition(id: ID!, position: Int): Card @update
@@ -70,7 +73,7 @@ type Board {
 
     name: String!
 
-    is_active: Boolean!
+    is_private: Boolean!
 
     created_at: DateTime!
 
