@@ -1,7 +1,7 @@
 <template>
   <div class="bg-column p-2.5 ml-3 rounded-md w-72 h-fit">
     <div class="flex">
-      <span class="grow ml-1 text-md font-bold">
+      <span class="grow ml-1 text-md font-bold border hover:border-blue-300">
         {{ column.title }}
       </span>
       <Icon
